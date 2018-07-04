@@ -1,0 +1,143 @@
+<style type="text/css">
+	.ranked-text {
+		font-style: italic;
+	}
+	
+	.percentage_bar {
+		background-color: #CC3333;
+		height: 5px;
+	}
+	
+	table {
+		width: 100%;
+		height: 100%;
+		
+		border-collapse: collapse;
+	}
+	table td, table th {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	
+	td a {
+		display: block;
+		width: 100%;
+		height: 100%;
+		padding: 5px;
+	}
+	td a, td a:link, td a:active, td a:hover, td a:visited {
+		color: #FFFFFF !important;
+	}
+	
+	table th {
+		border-bottom: 1px solid black;
+	}
+	
+	.hero-col {
+		width: 60px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	tr.even {
+		background-color: #777777;
+	}
+	tr.odd {
+		background-color: #666666;
+	}
+	
+	#heroes-table {
+		display: inline-block;
+		width: 49%;
+		float: left;
+	}
+	
+	#matches-table {
+		display: inline-block;
+		width: 49%;
+		float: right;
+	}
+	#heroes-table td, #matches-table td, td a {
+		height: 33px !important;
+	}
+	#matches-table td {
+		padding: 0px;
+	}
+	.match-id-col {
+		width: 50px;
+		text-align: left !important;
+	}
+	#matches-table td, #matches-table th {
+		text-align: center;
+	}
+	.hero-col a {
+		padding: 0px;
+	}
+	
+	
+	#buddies-table {
+		display: inline-block;
+		width: 32%;
+		float: left;
+	}
+	#buddies-table td, #totals-table td, #modes-table td {
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	
+	#totals-table {
+		display: inline-block;
+		width: 32%;
+		margin-left: 2%;
+	}
+	
+	#modes-table {
+		display: inline-block;
+		width: 32%;
+		float: right;
+	}
+	
+	tr.win {
+		background-color: rgba(0,255,0,0.1);
+	}
+	tr:hover.win {
+		background-color: rgba(0,255,0,0.27);
+	}
+	tr.loss {
+		background-color: rgba(255,0,0,0.1);
+	}
+	tr:hover.loss {
+		background-color: rgba(255,0,0,0.3);
+	}
+	
+	.total_matches_percentage {
+		float: right;
+		width: 50%;
+		margin-top: 5px;
+	}
+	
+	.player-name {
+		
+	}
+	.player-name img {
+		margin-top: -5px;
+	}
+	.player-name a {
+		padding-right: 20px;
+		color: #FFFFFF !important;
+	}
+	.player-name a:hover {
+		text-decoration: none;
+		color: #CC3333 !important;
+	}
+</style>
+<div ng-if="invalid && !Page.loading()" ng-cloak>
+	<h2>The chosen player is invalid.</h2>
+	<h2>{{invalidReason}}</h2>
+</div>
+<div ng-if="!invalid && !Page.loading()" ng-cloak>
+	<ul class="nav nav-tabs">
+		<li><a href="/player/{{account_id}}/">Home</a></li>
+		<li class="active"><a ng-href="/player/{{account_id}}/matches">Matches</a></li>
+	</ul>
+	
+</div>

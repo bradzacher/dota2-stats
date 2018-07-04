@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie11 lt-ie10 lt-ie9 lt-ie8 lt-ie7" ng-app="dotaStats" ng-controller="rootController"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie11 lt-ie10 lt-ie9 lt-ie8" ng-app="dotaStats" ng-controller="rootController"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie11 lt-ie10 lt-ie9" ng-app="dotaStats" ng-controller="rootController"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie11 lt-ie10" ng-app="dotaStats" ng-controller="rootController"> <![endif]-->
+<!--[if IE 10]>        <html class="no-js lt-ie11" ng-app="dotaStats" ng-controller="rootController"> <![endif]-->
+<!--[if gt IE 10]><!--><html class="no-js" ng-app="dotaStats" ng-controller="rootController"> <!--<![endif]-->
+    <head>
+        <base href="/" />
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title ng-bind="Page.title()">DotA 2 Stats and Tools</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="author" href="humans.txt" />
+        
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="js/angular-1.2.12/angular-csp.css" />
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body class="clearfix">
+        <div class="hidden">
+          <!-- image preloads -->
+          <img src="img/items/empty_lg.png" />
+          <img src="img/heroes/empty_sb.png" />
+        </div>
+		
+		<div id="body-container">
+			<div id="header-container">
+				<div id="header">
+					<div id="logo"><a href="/"></a></div>
+					<nav id="page-nav">
+						<ul>
+							<li>
+								<a href="matches">Matches</a>
+							</li>
+							<li>|</li>
+							<li>
+								<a href="players">Players</a>
+							</li>
+							<li>|</li>
+							<li>
+								<a href="heroes">Heroes</a>
+							</li>
+							<li>|</li>
+							<li>
+								<a href="lineups">Compare Lineups</a>
+							</li>
+							<li>|</li>
+							<li>
+								<a href="cumulative">Cumulative Stats</a>
+							</li>
+							<li>|</li>
+							<li>
+								<a href="backpacks">Backpacks</a>
+							</li>
+							<li>|</li>
+							<li>
+								<a href="#">League Games (Live and Past...)</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+
+			<div id="content-container">
+				<div id="content" ng-view></div>
+				<div ng-cloak ng-show="Page.error()" class="error">
+					<h1 class="dire">An error has occurred</h1>
+					<h2 class="radiant"><a href="{{Page.location()}}">Try refreshing!</a></h2>
+					<h3 style="color: black">Don't worry - the error was just reported.</h3>
+				</div>
+			</div>
+
+			<div id="footer-container">
+				<div id="footer">
+					Designed and developed by Brad Zacher. Dota 2 is a registered trademark of Valve Corporation.
+				</div>
+			</div>
+		</div>
+
+        <script src="js/jquery-2.1.0/jquery.min.js"></script>
+        <script src="js/angular-1.2.12/angular.js"></script>
+        <script src="js/angular-1.2.12/angular-route.js"></script>
+        <script src="js/angular-1.2.12/angular-resource.js"></script>
+        <script src="js/angular-1.2.12/angular-touch.js"></script>
+        <script src="js/angular-1.2.12/angular-animate.js"></script>
+        <script src="js/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/directives.js"></script>
+        
+        <div ng-show="Page.loading()" class="loading">&nbsp;</div>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+/* humanstxt.org/
+   The humans responsible & technology colophon */
+
+/* TEAM */
+                            
+Owner, Developer, King: Brad Zacher  
+Site: zacher.com.au
+Contact: brad [at] zacher.com.au
+Twitter: @bradzacher
+From: Adelaide, Australia
+
+/* THANKS */
+
+Tester: Markian Mayboroda
+Twitter: @mmayboroda
+From: Adelaide, Australia
+                            
+/* SITE */
+Last update: Regularly throughout 2014
+Standards: HTML5, CSS3
+Components: AngularJS, Angular-UI-Bootstrap, Bootstrap.css, HTML5Boilerplate, jQuery, Modernizr
+Software: Notepad++ w/NppFTP

@@ -1,0 +1,199 @@
+html {
+	position: absolute;
+}
+
+html, body {
+    color: #FFFFFF !important;
+    background-color: #666666 !important;
+	height: 100%;
+	width: 100%;
+}
+
+a:link, a:active, a:visited {
+    color: #FF0000 !important;
+}
+
+a:hover {
+    color: #CC3333 !important;
+}
+
+
+#body-container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	height: 100%;
+	width: 100%;
+}
+#body-container > div {
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+#body-container > #content-container {
+	flex-grow: 1;
+}
+
+
+#content-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	width: 100%;
+}
+#content-container > div {
+	flex-grow: 0;
+	
+}
+
+
+
+#footer-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	width: 100%;
+}
+#footer-container > div {
+	align-self: center;
+	flex-grow: 0;
+	text-align: center;
+}
+
+
+[tabset] > ul > li, [tabset] > ul > li > a {
+    color: #FF0000 !important;
+    cursor: pointer !important;
+}
+[tabset] > ul > li.active > a {
+    background-color: #CCCCCC;
+}
+.tab-pane {
+    width: 100%;
+}
+
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#header-container > *, #content-container > *, #footer-container > * {
+    width: 1024px;
+}
+
+/* Header Styling */
+
+#header-container {
+    background-color: #222222;
+}
+
+#header {
+    margin: auto;
+    position: relative;
+    width: 970px;
+}
+
+#logo {
+    background-image: url('../img/logo.png');
+    background-size: 50px 50px;
+    background-position: 0 0;
+    width: 50px;
+    height: 50px;
+}
+
+#logo a {
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+#page-nav {
+    position: absolute;
+    top: 0px;
+    left: 60px;
+}
+
+#page-nav ul {
+    padding-left: 0px;
+    margin-top: 1em;
+}
+
+#page-nav ul li {
+    display: inline-block;
+}
+
+#page-nav ul li a {
+    text-decoration: none;
+}
+
+/* other styling */
+
+.odd {
+    background-color: #555555;
+}
+.radiant {
+    color: #9AE40C;
+    border-color: #9AE40C;
+}
+.radiant-bg {
+    background-color: #9AE40C !important;
+}
+.dire {
+    color: #E74D08;
+    border-color: #E74D08;
+}
+.dire-bg {
+    background-color: #E74D08 !important;
+}
+
+.popover-inner {
+    color: black;
+}
+
+.loading {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background-image: url(../img/loading-transparent.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgba(255, 255, 255, 0.2);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#33ffffff', endColorstr='#33ffffff'); /* IE */
+}
+
+.error {
+    position: fixed;
+    left: 0px;
+    top: 50px;
+    height: 100% !important;
+    width: 100% !important;
+    background-color: rgba(255, 255, 255, 0.8);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#33ffffff', endColorstr='#33ffffff'); /* IE */
+	text-align: center;
+	padding-top: 100px;
+	font-weight: bold;
+}
+.error a {
+	color: inherit !important;
+	text-decoration: underline;
+}
+
+
+
+
+.greyscale_image {
+	filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id…0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+	filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: gray;
+	-webkit-filter: grayscale(100%);
+}

@@ -1,0 +1,401 @@
+                                <style type="text/css">
+	table {
+		width: 100%;
+		height: 100%;
+		
+		border-collapse: collapse;
+	}
+	table td, table th {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	
+	.hero-col {
+		width: 60px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.match-id-col {
+		width: 50px;
+		text-align: left !important;
+	}
+
+	table th {
+		border-bottom: 1px solid black;
+	}
+	td a, td a:link, td a:active, td a:hover, td a:visited {
+		color: #FFFFFF !important;
+		height: 33px !important;
+	}
+
+	tr.win {
+		background-color: rgba(0,255,0,0.1);
+	}
+	tr:hover.win {
+		background-color: rgba(0,255,0,0.27);
+	}
+	tr.loss {
+		background-color: rgba(255,0,0,0.1);
+	}
+	tr:hover.loss {
+		background-color: rgba(255,0,0,0.3);
+	}
+</style>
+<div ng-if="invalid && !Page.loading()" ng-cloak>
+	<h2>The chosen player is invalid.</h2>
+	<h2>{{invalidReason}}</h2>
+</div>
+<div ng-show="!invalid && !Page.loading()" ng-cloak>
+	<div tabset>
+		<div tab ng-controller="PlayerSummaryController" select="selectTab()" active="active">
+			<style type="text/css">
+				.summary-tab td a {
+					display: block;
+					width: 100%;
+					height: 100%;
+					padding: 5px;
+				}
+				.summary-tab .hero-col > a {
+					padding-top: 0px;
+				}
+				
+				.summary-tab tr.even {
+					background-color: #777777;
+				}
+				.summary-tab tr.odd {
+					background-color: #666666;
+				}
+				
+				#heroes-table {
+					display: inline-block;
+					width: 49%;
+					float: left;
+				}
+				
+				#matches-table {
+					display: inline-block;
+					width: 49%;
+					float: right;
+				}
+				#heroes-table td, #matches-table td {
+					height: 33px !important;
+				}
+				#matches-table td {
+					padding: 0px;
+				}
+				#matches-table td, #matches-table th {
+					text-align: center;
+				}
+				.hero-col a {
+					padding: 0px;
+				}
+				
+				
+				#buddies-table {
+					display: inline-block;
+					width: 32%;
+					float: left;
+				}
+				#buddies-table td, #totals-table td, #modes-table td {
+					padding-top: 4px;
+					padding-bottom: 4px;
+				}
+				
+				#totals-table {
+					display: inline-block;
+					width: 32%;
+					margin-left: 2%;
+				}
+				
+				#modes-table {
+					display: inline-block;
+					width: 32%;
+					float: right;
+				}
+				
+				
+				
+				.summary-tab .ranked-text {
+					font-style: italic;
+				}
+				
+				.percentage_bar {
+					background-color: #CC3333;
+					height: 5px;
+				}
+							
+				
+				
+				.total_matches_percentage {
+					float: right;
+					width: 50%;
+					margin-top: 5px;
+				}
+				
+				.player-name {
+					
+				}
+				.player-name img {
+					margin-top: -5px;
+				}
+				.player-name a {
+					padding-right: 20px;
+					color: #FFFFFF !important;
+				}
+				.player-name a:hover {
+					text-decoration: none;
+					color: #CC3333 !important;
+				}
+			</style>
+		
+			<div tab-heading>
+				Summary
+			</div>
+			
+			<div class="summary-tab">
+				<h1 class="player-name">
+					<a ng-href="{{profile.profileurl}}">
+						<img ng-src="{{profile.avatarmedium}}" />
+						{{profile.personaname}}
+					</a>
+				</h1>
+				
+				<div class="top-row clearfix">
+					<div id="heroes-table">
+						<h2>Most Played Heroes</h2>
+						<table>
+							<thead>
+								<tr>
+									<th class="hero-col">&nbsp;</th>
+									<th>Matches</th>
+									<th>Win Rate</th>
+									<th>KDA Ratio</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="hero in heroes" ng-class="{odd: $odd, even: $even}">
+									<td class="hero-col"><div hero hero_id="hero.hero_id"></div></td>
+									<td>{{hero.matches_played}}<div class="percentage_bar" ng-style="{width: hero.widths.matches_played}"></div></td>
+									<td>{{hero.win_rate}}<div class="percentage_bar" ng-style="{width: hero.widths.win_rate}"></div></td>
+									<td>{{hero.kda}}<div class="percentage_bar" ng-style="{width: hero.widths.kda}"></div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<div id="matches-table">
+						<h2>Latest Matches</h2>
+						<table>
+							<thead>
+								<tr>
+									<th class="match-id-col">Match ID</th>
+									<th class="hero-col">&nbsp;</th>
+									<th>K / D / A</th>
+									<th>LH / D </th>
+									<th>GPM</th>
+									<th>XP/M</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="match in matches" ng-class="{win: match.win, loss: !match.win}">
+									<td class="match-id-col"><a ng-href="/match/{{match.match_id}}">{{match.match_id}}</a></td>
+									<td class="hero-col"><a ng-href="/match/{{match.match_id}}"><div hero hero_id="match.hero_id"></div></a></td>
+									<td><a ng-href="/match/{{match.match_id}}">{{match.kills}} / {{match.deaths}} / {{match.assists}}</a></td>
+									<td><a ng-href="/match/{{match.match_id}}">{{match.last_hits}} / {{match.denies}}</a></td>
+									<td><a ng-href="/match/{{match.match_id}}">{{match.gpm}}</a></td>
+									<td><a ng-href="/match/{{match.match_id}}">{{match.xppm}}</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="bottom-row clearfix">
+				<div id="buddies-table">
+					<h2>Best Buddies</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th>Matches</th>
+								<th>Win Rate</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="player in buddies" ng-class="{odd: $odd, even: $even}">
+								<td><div player slot="player"></div></td>
+								<td>{{player.matches_played}}<div class="percentage_bar" ng-style="{width: player.widths.matches_played}"></div></td>
+								<td>{{player.win_rate}}<div class="percentage_bar" ng-style="{width: player.widths.win_rate}"></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div id="totals-table">
+					<h2>Totals</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Stat</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even">
+								<td>Matches Played</td>
+								<td>{{totals.matches_played}}
+									<div class="total_matches_percentage" popover="Dire: {{totals.dire_matches}}" popover-title="Radiant: {{totals.radiant_matches}}" popover-placement="right" popover-trigger="mouseenter" popover-animation="false">
+										<div class="percentage_bar radiant-bg" ng-style="{width: totals.widths.radiant}"></div>
+										<div class="percentage_bar dire-bg" ng-style="{width: totals.widths.dire}"></div>
+									</div>
+								</td>
+							</tr>
+							<tr class="odd">
+								<td>Last Match</td>
+								<td>{{totals.last_match | timeSince}} ago</td>
+							</tr>
+							<tr class="even">
+								<td>Win Rate</td>
+								<td>{{totals.win_rate}}</td>
+							</tr>
+							<tr class="odd">
+								<td>Abandoned Matches</td>
+								<td>{{totals.abandoned_matches}}</td>
+							</tr>
+							<tr class="even">
+								<td>K / D / A</td>
+								<td>{{totals.kills}} / {{totals.deaths}} / {{totals.assists}}</td>
+							</tr>
+							<tr class="odd">
+								<td>KDA Ratio</td>
+								<td>{{totals.kda}}</td>
+							</tr>
+							<tr class="even">
+								<td>LH / D</td>
+								<td>{{totals.last_hits}} / {{totals.denies}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div id="modes-table">
+					<h2>Most Played Modes</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Type</th>
+								<th>Matches</th>
+								<th>Win Rate</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="mode in modes" ng-class="{odd: $odd, even: $even}">
+								<td ng-class="{'ranked-text': mode.ranked}"><span ng-if="mode.ranked">Ranked </span>{{mode.game_mode}}</td>
+								<td>{{mode.matches_played}}<div class="percentage_bar" ng-style="{width: mode.widths.matches_played}"></div></td>
+								<td>{{mode.win_rate}}<div class="percentage_bar" ng-style="{width: mode.widths.win_rate}"></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div tab ng-controller="PlayerMatchesController" select="selectTab()" active="active">
+			<style type="text/css">
+				.matches-tab .items {
+					width: 271px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+				
+				.matches-tab [item] {
+				  width: 45px;
+				  height: 33px;
+				  display: inline-block;
+				  float: left;
+				  background-size: 44px 33px;
+				  border-left: 1px solid black;
+				}
+				
+				.matches-tab [item] + [item] + [item] + [item] + [item] + [item] {
+				  width: 46px;
+				  border-right: 1px solid black;
+				}
+				
+				.matches-tab [item] > img {
+					height: 33px;
+					margin: 0px;
+					padding: 0px;
+					float: left;
+				}
+				
+				.matches-tab .ranked-text {
+					color: #FF0000;
+					font-weight: bold;
+				}
+				
+				.page-select {
+					float: right;
+				}
+				
+				.page-select a {
+					cursor: pointer;
+				}
+			</style>
+		
+			<div tab-heading>
+				Matches
+			</div>
+			<h2>todo</h2>
+			<div class="matches-tab">
+				<table>
+					<tr ng-repeat="match in pageData">
+						<thead>
+							<tr>
+								<th class="match-id-col">ID</th>
+								<th>Time Since</th>
+								<th>Game Mode</th>
+								<th>Duration</th>
+								<th class="hero-col">&nbsp;</th>
+								<th>K / D / A</th>
+								<th>LH / D</th>
+								<th>GPM</th>
+								<th>XP/M</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="match in pageData" ng-class="{win: match.win, loss: !match.win}">
+								<td class="match-id-col"><a ng-href="/match/{{match.match_id}}">{{match.match_id}}</a></td>
+								<td><a ng-href="/match/{{match.match_id}}">{{match.start_time | timeSince}}</a></td>
+								<td><a ng-href="/match/{{match.match_id}}"><span ng-if="match.ranked" class="ranked-text">Ranked </span>{{match.game_mode}}</a></td>
+								<td><a ng-href="/match/{{match.match_id}}">{{match.duration | duration}}</a></td>
+								<td class="hero-col"><a ng-href="/match/{{match.match_id}}"><div hero hero_id="match.player_data.hero_id"></div></a></td>
+								<td><a ng-href="/match/{{match.match_id}}">{{match.player_data.kills}} / {{match.player_data.deaths}} / {{match.player_data.assists}}</a></td>
+								<td><a ng-href="/match/{{match.match_id}}">{{match.player_data.last_hits}} / {{match.player_data.denies}}</a></td>
+								<td><a ng-href="/match/{{match.match_id}}">{{match.player_data.gold_per_min}}</a></td>
+								<td><a ng-href="/match/{{match.match_id}}">{{match.player_data.xp_per_min}}</a></td>
+								<td>
+									<a ng-href="/match/{{match.match_id}}">
+										<div class="items">
+											<div item item_id="match.player_data.item_0"></div>
+											<div item item_id="match.player_data.item_1"></div>
+											<div item item_id="match.player_data.item_2"></div>
+											<div item item_id="match.player_data.item_3"></div>
+											<div item item_id="match.player_data.item_4"></div>
+											<div item item_id="match.player_data.item_5"></div>
+										</div>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</tr>
+				</table>
+				<div class="page-select" class="noSelect clearfix">
+					<div pagination on-select-page="loadPage(page)" total-items="totalItems" items-per-page="resultsPerPage" num-pages="pagesTotal" max-size="maxSize" page="currentPage"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+                            

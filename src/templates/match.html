@@ -1,0 +1,393 @@
+<style type="text/css">
+    .team_table {
+        width: 100%;
+        background-color: #777777;
+    }
+    .team_table td, .team_table th {
+        text-align: center;
+    }
+
+    .team_table .player {
+        width: 200px;
+        min-width: 200px;
+        text-align: left;
+        padding-left: 10px;
+    }
+    .team_table .player a {
+        text-decoration: none;
+    }
+
+    .team_table .hero_img {
+        width: 59px;
+    }
+
+    .team_table .level {
+        width: 60px;
+        border-right: 1px solid black;
+    }
+
+    .team_table .kda {
+        width: 90px;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .team_table .lhd {
+        width: 80px;
+        border-left: 1px solid black;
+    }
+
+    .team_table .item_img {
+        width: 264px;
+    }
+    .team_table .item_img img {
+        height: 33px;
+        margin: 0px;
+        padding: 0px;
+        float: left;
+    }
+
+    .team_table .gold {
+        width: 50px;
+        border-right: 1px solid black;
+    }
+
+    .team_table .gpm {
+        width: 60px;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .team_table .xppm {
+        width: 60px;
+        border-left: 1px solid black;
+    }
+
+    .match_details {
+        width: 800px;
+        height: 75px;
+        padding-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .details-left {
+        float: left;
+        width: 30%;
+    }
+    .details-left div {
+        float: left;
+        width: 100%;
+        text-align: left;
+    }
+
+    .details-right {
+        float: right;
+        width: 30%;
+    }
+    .details-right div {
+        float: right;
+        width: 100%;
+        text-align: right;
+    }
+
+    .match_details div span {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+    #victor {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        float: left;
+        width: 40%;
+    }
+
+    .player {
+        height: 33px;
+    }
+    .player a {
+        display: block;
+        height: 100%;
+        width: 100%;
+        text-decoration: none;
+        color: inherit;
+    }
+    .player a[href] {
+        color: red;
+    }
+    .player a:hover {
+        color: inherit;
+    }
+    
+    [map-canvas] {
+        width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .items {
+        width: 271px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    [item] {
+      width: 45px;
+      height: 33px;
+      display: inline-block;
+      float: left;
+      background-size: 44px 33px;
+      border-left: 1px solid black;
+    }
+    
+    [item] + [item] + [item] + [item] + [item] + [item] {
+      width: 46px;
+      border-right: 1px solid black;
+    }
+    
+    .hero_img > [hero] {
+      width: 59px;
+      height: 33px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    
+    
+    .player-skills [hero] {
+        display: inline-block;
+		margin-right: 10px;
+    }
+    .player-skills [player] {
+		color: white;
+        display: inline-block;
+    }
+	.player-skills {
+		width: 715px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.player-skills .ability-row {
+		width: 100%;
+	}
+	.player-skills .ability-img {
+		display: inline-block;
+	}
+	.player-skills .ability-img img {
+		height: 36px;
+		width: 36px;
+	}
+	.player-skills .ability-level {
+		width: 27px;
+		height: 27px;
+		display: inline-block;
+		border: 1px solid #777777;
+		vertical-align: middle;
+		text-align: center;
+		margin-left: 2px;
+		
+		background-color: #333333;
+	}
+	.ability-level + .ability-level{
+		margin-left: -1px;
+	}
+	.player-skills .ability-level span {
+		vertical-align: text-top;
+	}
+	.player-skills .ability-level.hasAbility {
+		background-color: #AA0000;
+		color: black;
+		font-weight: bold;
+	}
+	.ability-player {
+		margin-bottom: 5px;
+	}
+	.player-skills + .player-skills {
+		margin-top: 10px;
+	}
+	.abilities-container {
+		background-color: #555555;
+		margin-left: 5px;
+		margin-right: 5px;
+		padding: 5px;
+	}
+	
+	.ability-team-container {
+		padding: 10px;
+		width: 750px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.radiant.ability-team-container {
+		background-color: rgba(154, 228, 12, 0.02);
+	}
+	.dire.ability-team-container {
+		background-color: rgba(231, 77, 8, 0.018);
+	}
+	
+	.pick-bans {
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 590px;
+		background: #333333;
+	}
+	.pick-bans [hero] {
+		float: left;
+	}
+	.pick-bans > div > div {
+		float: left;
+		position: relative;
+	}
+	.pick-bans .pick {
+		color: #66FF66;
+		text-align: center;
+	}
+	.pick-bans .ban {
+		color: #FF0000;
+		text-align: center;
+	}
+	.pick-bans .pb-order {
+		position: absolute;
+		top: 0px;
+		z-index: 1;
+		right: 0px;
+		text-align: right;
+		background-color: black;
+	}
+</style>
+<div ng-hide="Page.loading()">
+    <div tabset>
+        <div tab> <!-- tabstart -->
+            <div tab-heading>
+                Match Details
+            </div>
+            <div class="match_details">
+                <div class="details-left">
+                    <div id="match-id">
+                        Match ID: <span>#{{match_id}}</span>
+                    </div>
+                    <div id="start-time">
+                        <span title="{{matchdata.start_time}}">Played {{matchdata.start_time | timeSince}} ago</span>
+                    </div>
+                </div>
+                <div id="victor" class="{{(matchdata.radiant_win == 0) ? 'dire' : 'radiant'}}">
+                    {{(matchdata.radiant_win == 0) ? "Dire" : "Radiant"}} Victory<br />
+                </div>
+                <div class="details-right">
+                    <div id="duration">
+                        Duration: <span>{{matchdata.duration | duration}}</span>
+                    </div>
+                    <div id="game-mode">
+                        Game Mode: <span>{{matchdata.game_mode | game_mode}}</span>
+                    </div>
+					<div id="lobby-type">
+						<span>{{matchdata.lobby_type | lobby_type}}</span>
+					</div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div ng-repeat="team in teams">
+                <h3 class="{{team.style}}">{{team.name}}</h3>
+                <table class="team_table">
+                    <thead>
+                        <tr>
+                            <th class="player"><!-- Player -->&nbsp;</th>
+                            <th class="hero_img"><!-- Hero -->&nbsp;</th>
+                            <th class="level">Level</th>
+                            <th class="kda">K / D / A</th>
+                            <th class="lhd">LH / D</th>
+                            <th class="item_img"><!-- Items -->&nbsp;</th>
+                            <th class="gold">Gold</th>
+                            <th class="gpm">GPM</th>
+                            <th class="xppm">XPPM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat-start="slot in team.players" ng-class-odd="'odd'">
+                            <td class="player"><div player slot="slot"></div></td>
+                            <td class="hero_img"><div hero hero_id="slot.hero_id"></div></td>
+                            <td class="level">{{slot.level}}</td>
+                            <td class="kda">{{slot.kills}} / {{slot.deaths}} / {{slot.assists}}</td>
+                            <td class="lhd">{{slot.last_hits}} / {{slot.denies}}</td>
+                            <td class="item_img">
+                                <div class="items">
+                                    <div item item_id="slot.item_0"></div>
+                                    <div item item_id="slot.item_1"></div>
+                                    <div item item_id="slot.item_2"></div>
+                                    <div item item_id="slot.item_3"></div>
+                                    <div item item_id="slot.item_4"></div>
+                                    <div item item_id="slot.item_5"></div>
+                                </div>
+                            </td>
+                            <td class="gold">{{slot.gold}}</td>
+                            <td class="gpm">{{slot.gold_per_min}}</td>
+                            <td class="xppm">{{slot.xp_per_min}}</td>
+                        </tr>
+                        <tr ng-repeat-end ng-if="slot.additional_units.length != 0" ng-class-odd="'odd'">
+                            <td class="player" ng-repeat-start="unit in slot.additional_units">&nbsp;</td>
+                            <td class="hero_img"><div unit unit_name="unit.unitname"></div></td>
+                            <td class="level">&nbsp;</td>
+                            <td class="kda">&nbsp;</td>
+                            <td class="lhd">&nbsp;</td>
+                            <td class="item_img">
+                                <div class="items">
+                                    <div item item_id="unit.item_0"></div>
+                                    <div item item_id="unit.item_1"></div>
+                                    <div item item_id="unit.item_2"></div>
+                                    <div item item_id="unit.item_3"></div>
+                                    <div item item_id="unit.item_4"></div>
+                                    <div item item_id="unit.item_5"></div>
+                                </div>
+                            </td>
+                            <td class="gold">&nbsp;</td>
+                            <td class="gpm">&nbsp;</td>
+                            <td class="xppm" ng-repeat-end>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+				<div class="pick-bans" ng-if="hasPickBans">
+					<div class="clearfix">
+						<div ng-repeat="pb in matchdata.pickbans[team.style]">
+							<div class="pb-order">{{pb.order+1}}</div>
+							<div hero hero_id="pb.hero_id" ng-class="{greyscale_image: pb.is_pick==0}"></div>
+							<div ng-if="pb.is_pick==0" class="ban"><span class="glyphicon glyphicon-remove"></span></div>
+							<div ng-if="pb.is_pick!=0" class="pick"><span class="glyphicon glyphicon-ok"></span></div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div> <!-- tabend -->
+        <div tab> <!-- tabstart -->
+            <div tab-heading>
+                Building Status
+            </div>
+            <div map-canvas match="matchdata"></div>
+        </div> <!-- tabend -->
+        <div tab> <!-- tabstart -->
+            <div tab-heading>
+                Skill Builds
+            </div>
+            <div class="skill-builds">
+				<div>
+					<div ng-repeat="team in teams" class="{{team.style}} ability-team-container">
+						<h3 class="{{team.style}} ability-team-title">{{team.name}}</h3>
+						<div class="player-skills" ng-repeat="slot in team.players" ng-if="slot.abilities">
+							<div class="ability-player"><div hero hero_id="slot.hero_id"></div><div player slot="slot"></div></div>
+							<div class="abilities-container">
+								<div class="ability-row" ng-repeat="ability in slot.abilities">
+									<div class="ability-img"><img ng-src="img/abilities/{{ability.obj.name}}_md.png" alt="{{ability.obj.localized_name}}" popover="{{ability.obj.localized_name}}" popover-title="" popover-placement="right" popover-trigger="mouseenter" popover-animation="false" popover-append-to-body="true" /></div>
+									<div ng-repeat="i in iter" class="ability-level" ng-class="{hasAbility: ability[i]}"><span ng-if="ability[i]">{{i}}</span><span ng-if="!ability[i]">&nbsp;</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div> <!-- tabend -->
+    </div>
+</div>

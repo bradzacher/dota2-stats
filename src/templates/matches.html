@@ -1,0 +1,198 @@
+<style type="text/css">
+    .matches-container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    #matches {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    td, th {
+        border-bottom: 1px solid black !important;
+        border-top: 0px !important;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        padding-top: 0px;
+        padding: 0px;
+    }
+
+    tr.match-row {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #matches-id-col {
+        width: 100px;
+    }
+    #played-col {
+        width: 80px;
+    }
+    #matches-winner-col {
+        width: 70px;
+    }
+    #matches-mode-col {
+        width: 105px;
+    }
+    #matches-teams-col {
+        width: 420px;
+    }
+    #matches-teams-radiant-col, #matches-teams-dire-col {
+        width: 255px;
+    }
+
+    #matches-nav {
+        cursor: pointer;
+    }
+    #matches-nav ul {
+        float:right;
+    }
+    #matches-nav-prev, .matches-nav-page, #matches-nav-next {
+        display: inline-block;
+    }
+    .matches-nav-page {
+        width: 30px;
+        text-align: center;
+    }
+
+    #matches-nav ul li.active {
+        color: #FFBBBB;
+    }
+    #matches-nav ul li {
+        color: #FF0000;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    #matches-nav ul li.disabled {
+        display: none;
+    }
+
+    .matches-heroes-team-radiant, .matches-heroes-team-dire {
+        display: inline-block;
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 100%;
+        border-right: 1px solid black;
+    }
+    .matches-hero-portrait {
+        display: inline-block;
+        border-left: 1px solid black;
+        border-right: 0px;
+        border-top: 0px;
+        border-bottom: 0px;
+    }
+    .matches-hero-portrait img {
+        width: 50px;
+        height: 28px;
+    }
+    [hero] {
+        background-size: 50px 28px;
+    }
+    .known-user {
+        position: absolute;
+        width: 50px;
+        height: 28px;
+        border: 1px solid red;
+        pointer-events: none;
+    }
+
+    .dire, .radiant {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .match-row a {
+        display: block;
+        height: 100%;
+        width: 100%;
+        text-decoration: none;
+        color: inherit !important;
+    }
+    .match-row a:hover {
+        color: inherit !important;
+    }
+    .match-row:hover {
+        background-color: #555555;
+    }
+	
+	.ranked-text {
+		color: #FF0000;
+		font-weight: bold;
+	}
+	
+	#disclaimer {
+		text-align: center;
+	}
+</style>
+<div class="matches-container">
+    <table id="matches">
+        <thead>
+            <tr class="header-row">
+                <th id="matches-id-col">ID</th>
+                <th id="played-col">Time Since</th>
+                <th id="matches-winner-col">Winner</th>
+                <th id="matches-mode-col">Game Mode</th>
+                <th id="matches-teams-radiant-col">Radiant</th>
+                <th id="matches-teams-dire-col">Dire</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="match-row" ng-repeat="match in pageData">
+                <td>
+                    <a href="match/{{match.match_id}}">{{match.match_id}}</a>
+                </td>
+                <td>
+                    <span title="{{match.start_time}}">{{match.start_time | timeSince}}</span>
+                </td>
+                <td class="{{match.winnerClass}}">
+                    <a href="match/{{match.match_id}}">{{match.winner}}</a>
+                </td>
+                <td>
+                    <a href="match/{{match.match_id}}"><span class="ranked-text" ng-if="match.ranked">Ranked </span>{{match.game_mode}}</a>
+                </td>
+                <td>
+                    <a href="match/{{match.match_id}}">
+                        <div class="matches-heroes-team-radiant">
+                            <div class="matches-hero-portrait" ng-repeat="slot in match.players | radiant">
+                              <div ng-if="slot.isUser" class="known-user">&nbsp;</div>
+                              <div hero hero_id="slot.hero_id" body="slot.personaname"></div>
+                            </div>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <a href="match/{{match.match_id}}">
+                        <div class="matches-heroes-team-dire">
+                            <div class="matches-hero-portrait" ng-repeat="slot in match.players | dire">
+                              <div ng-if="slot.isUser" class="known-user">&nbsp;</div>
+                              <div hero hero_id="slot.hero_id" body="slot.personaname"></div>
+                            </div>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="matches-nav" class="noSelect clearfix">
+        <div pagination on-select-page="loadPage(page)" total-items="totalItems" items-per-page="resultsPerPage" num-pages="pagesTotal" max-size="maxSize" page="currentPage"></div>
+        <!--
+        <ul>
+            <li id="matches-nav-prev" class=".matches-nav-page" ng-class="{'disabled': page == 0}" ng-click="prevPage()">«</li>
+            <li class="matches-nav-page" ng-repeat="n in pageRange" ng-click="loadPage(n)" ng-class="{'active': page == n}">
+                {{n + 1}}
+            </li>
+            <li id="matches-nav-next" class=".matches-nav-page" ng-class="{'disabled': page == pagesTotal}" ng-click="nextPage()">»</div>
+        </ul>
+        -->
+    </div>
+	<div id="disclaimer">
+		Matches are updated approximately every 5 minutes.
+	</div>
+</div>
+
+                            
